@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>James Stahler — Cybersecurity Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #020814;
+    --surface: rgba(4,19,38,0.85);
+    --surface2: rgba(2,8,20,0.7);
+    --border: rgba(59,130,246,0.22);
+    --border-hover: rgba(96,165,250,0.7);
+    --blue: #3b82f6;
+    --blue-light: #60a5fa;
+    --blue-dim: rgba(59,130,246,0.12);
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --white: #f8fafc;
+    --accent: #38bdf8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px;
+    background-image:
+      radial-gradient(ellipse 60% 50% at 20% 10%, rgba(29,78,216,0.13) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(14,165,233,0.07) 0%, transparent 70%);
+  }
+
+  .wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    background: linear-gradient(135deg, #020c1b 0%, #041326 50%, #020c1b 100%);
+    box-shadow: 0 0 80px rgba(59,130,246,0.08), 0 0 0 1px rgba(59,130,246,0.1);
+    padding: 28px;
+    animation: fadeIn 0.6s ease;
+  }
+
+  @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: rgba(0,0,0,0.35);
+    padding: 28px;
+    align-items: center;
+  }
+  .hero-left { display: flex; gap: 24px; align-items: center; }
+
+  .avatar {
+    flex-shrink: 0;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(59,130,246,0.1);
+    border: 1px solid rgba(96,165,250,0.35);
+    display: flex; align-items: center; justify-content: center;
+    animation: pulse-ring 3s ease-in-out infinite;
+  }
+  @keyframes pulse-ring {
+    0%,100% { box-shadow: 0 0 0 0 rgba(59,130,246,0.25); }
+    50% { box-shadow: 0 0 0 12px rgba(59,130,246,0); }
+  }
+  .avatar svg { width: 72px; height: 72px; color: var(--blue-light); }
+
+  .hero-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .hero-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--blue-light);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+  .hero-bio {
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.7;
+    max-width: 560px;
+    margin-top: 12px;
+  }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 20px;
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+  .hero-meta a { color: var(--muted); text-decoration: none; }
+  .hero-meta a:hover { color: var(--blue-light); }
+  .hero-meta span, .hero-meta a { display:flex; align-items:center; gap:6px; }
+  .hero-meta svg { color: var(--blue-light); width:16px; height:16px; flex-shrink:0; }
+
+  .link-buttons {
+    display: grid;
+    gap: 10px;
+    min-width: 240px;
+  }
+  .link-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: rgba(2,8,20,0.6);
+    padding: 14px 18px;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  }
+  .link-btn:hover {
+    border-color: var(--blue-light);
+    background: var(--blue-dim);
+    transform: translateX(3px);
+  }
+  .link-btn .btn-left { display:flex; align-items:center; gap:10px; }
+  .link-btn svg { width:20px; height:20px; flex-shrink:0; }
+  .link-btn .icon { color: var(--blue-light); }
+  .link-btn .arrow { color: var(--blue-light); width:16px; height:16px; transition: transform 0.15s; }
+  .link-btn:hover .arrow { transform: translateX(3px); }
+
+  /* ── SECTIONS ── */
+  section { margin-top: 32px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .section-line { flex:1; height:1px; background: rgba(59,130,246,0.45); }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--blue-light);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+  .project-card {
+    display: block;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface2);
+    padding: 20px;
+    transition: border-color 0.2s, background 0.2s, transform 0.18s;
+  }
+  .project-card:hover {
+    border-color: var(--border-hover);
+    background: var(--blue-dim);
+    transform: translateY(-3px);
+  }
+  .project-top { display:flex; gap:16px; align-items:flex-start; }
+  .project-icon { color: var(--blue-light); width:40px; height:40px; flex-shrink:0; margin-top:2px; }
+  .project-name { font-size:1.05rem; font-weight:800; color:var(--white); }
+  .project-card:hover .project-name { color: var(--blue-light); }
+  .project-desc { color: var(--muted); font-size:0.87rem; line-height:1.65; margin-top:8px; }
+  .tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
+  .tag {
+    border: 1px solid rgba(59,130,246,0.4);
+    border-radius:6px;
+    padding:3px 10px;
+    font-size:0.75rem;
+    color: var(--blue-light);
+    font-weight:600;
+  }
+
+  .view-all-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px auto 0;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface2);
+    padding: 14px 28px;
+    color: var(--white);
+    font-size:0.95rem;
+    font-weight:700;
+    width: fit-content;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .view-all-btn:hover { border-color: var(--border-hover); background: var(--blue-dim); }
+  .view-all-btn svg { width:20px; height:20px; }
+
+  /* ── CERTS + PLATFORMS ── */
+  .two-col { display:grid; grid-template-columns: 1.1fr 0.9fr; gap:24px; }
+
+  .cert-list {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--surface2);
+  }
+  .cert-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(59,130,246,0.1);
+  }
+  .cert-row:last-child { border-bottom: none; }
+  .cert-left { display:flex; align-items:center; gap:14px; }
+  .cert-icon { color: var(--blue-light); width:34px; height:34px; flex-shrink:0; }
+  .cert-name { font-weight:800; color:var(--white); font-size:0.92rem; }
+  .cert-sub { color:var(--muted); font-size:0.8rem; margin-top:2px; }
+  .cert-status {
+    font-size:0.65rem;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--blue-light);
+    white-space:nowrap;
+  }
+
+  .platforms-grid { display:grid; gap:12px; }
+  .platform-card {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface2);
+    padding: 14px 18px;
+  }
+  .platform-name { font-weight:800; color:var(--white); font-size:0.95rem; }
+  .platform-desc { color:var(--muted); font-size:0.83rem; margin-top:4px; line-height:1.5; }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
+    gap: 10px;
+  }
+  .skill-chip {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface2);
+    padding: 14px 8px;
+    text-align:center;
+    font-weight:600;
+    font-size:0.85rem;
+    color:var(--text);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .skill-chip:hover { border-color: var(--blue-light); background: var(--blue-dim); color:var(--white); }
+
+  /* ── FOOTER CTA ── */
+  .cta {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface2);
+    padding: 20px 24px;
+    flex-wrap: wrap;
+  }
+  .cta-left { display:flex; align-items:center; gap:16px; }
+  .cta-left svg { color:var(--blue-light); width:44px; height:44px; flex-shrink:0; }
+  .cta-heading {
+    font-family:'Rajdhani',sans-serif;
+    font-size:1rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--white);
+  }
+  .cta-sub { color:var(--muted); font-size:0.85rem; margin-top:2px; }
+  .cta-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    background: var(--blue);
+    color: var(--white);
+    font-weight:700;
+    font-size:0.9rem;
+    padding: 12px 22px;
+    border-radius: 12px;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .cta-btn:hover { background: #2563eb; transform: scale(1.03); }
+  .cta-btn svg { width:18px; height:18px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .link-buttons { grid-template-columns: repeat(2,1fr); min-width: unset; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .hero-left { flex-direction: column; }
+    .link-buttons { grid-template-columns: 1fr; }
+    .avatar { width:90px; height:90px; }
+    .avatar svg { width:52px; height:52px; }
+    .wrapper { padding:16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="avatar">
+        <!-- Shield Check Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <polyline points="9 12 11 14 15 10"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="hero-name">JAMES STAHLER</h1>
+        <p class="hero-title">Aspiring SOC Analyst &nbsp;|&nbsp; IT Support &nbsp;|&nbsp; NOC Technician</p>
+        <p class="hero-bio">Motivated and detail-oriented IT professional transitioning into cybersecurity. Passionate about threat detection, system administration, and solving real-world problems through hands-on labs and continuous learning.</p>
+        <div class="hero-meta">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Urbana, Ohio
+          </span>
+          <a href="mailto:J.Stahler@aol.com">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            J.Stahler@aol.com
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="link-buttons">
+      <a href="https://github.com/JamesStahler/soc-analyst-portfolio/blob/main/James_Stahler_Resume1.pdf" class="link-btn">
+        <span class="btn-left">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Resume
+        </span>
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/james-stahler" target="_blank" rel="noreferrer" class="link-btn">
+        <span class="btn-left">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </span>
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+      </a>
+      <a href="https://github.com/JamesStahler/soc-analyst-portfolio" target="_blank" rel="noreferrer" class="link-btn">
+        <span class="btn-left">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </span>
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+      </a>
+      <a href="https://sites.google.com/view/james-stahler/home" target="_blank" rel="noreferrer" class="link-btn">
+        <span class="btn-left">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Portfolio Website
+        </span>
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- CORE PROJECTS -->
+  <section>
+    <div class="section-header">
+      <h2 class="section-title">Core Projects</h2>
+      <div class="section-line"></div>
+      <span class="section-label">Hands-On Projects &amp; Labs</span>
+    </div>
+    <div class="projects-grid">
+
+      <a href="https://github.com/JamesStahler/soc-analyst-portfolio/tree/main/projects/wireshark-analysis" target="_blank" rel="noreferrer" class="project-card">
+        <div class="project-top">
+          <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <div>
+            <div class="project-name">Wireshark Packet Analysis</div>
+            <p class="project-desc">Captured and analyzed network traffic to identify DNS queries, TCP handshakes, and suspicious packets. Improved understanding of network protocols and traffic behavior.</p>
+          </div>
+        </div>
+        <div class="tags"><span class="tag">Wireshark</span><span class="tag">TCP/IP</span><span class="tag">DNS</span></div>
+      </a>
+
+      <a href="https://github.com/JamesStahler/soc-analyst-portfolio/tree/main/projects/nmap-analysis" target="_blank" rel="noreferrer" class="project-card">
+        <div class="project-top">
+          <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          <div>
+            <div class="project-name">Nmap Network Scanning Lab</div>
+            <p class="project-desc">Performed host discovery, service enumeration, version detection, and OS fingerprinting. Used results to identify open ports and potential vulnerabilities.</p>
+          </div>
+        </div>
+        <div class="tags"><span class="tag">Nmap</span><span class="tag">Enumeration</span></div>
+      </a>
+
+      <a href="https://github.com/JamesStahler/soc-analyst-portfolio/tree/main/projects/windows-system-optimization-analysis" target="_blank" rel="noreferrer" class="project-card">
+        <div class="project-top">
+          <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><polyline points="8 10 10 12 14 8"/></svg>
+          <div>
+            <div class="project-name">Windows System Optimization</div>
+            <p class="project-desc">Created PowerShell scripts to automate cleanup, remove bloat, manage startup programs, and improve overall system performance and security.</p>
+          </div>
+        </div>
+        <div class="tags"><span class="tag">PowerShell</span><span class="tag">Windows</span></div>
+      </a>
+
+      <a href="https://github.com/JamesStahler/soc-analyst-portfolio" target="_blank" rel="noreferrer" class="project-card">
+        <div class="project-top">
+          <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          <div>
+            <div class="project-name">Linux Administration / CLI</div>
+            <p class="project-desc">Practiced file permissions, user management, log analysis, process monitoring, and system navigation in Linux environments.</p>
+          </div>
+        </div>
+        <div class="tags"><span class="tag">Linux</span><span class="tag">Bash</span></div>
+      </a>
+
+      <a href="https://github.com/JamesStahler/soc-analyst-portfolio" target="_blank" rel="noreferrer" class="project-card">
+        <div class="project-top">
+          <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          <div>
+            <div class="project-name">SQL / Database Queries</div>
+            <p class="project-desc">Wrote SQL queries to filter, sort, and analyze data. Practiced joins, aggregation, and log analysis for incident response scenarios.</p>
+          </div>
+        </div>
+        <div class="tags"><span class="tag">SQL</span><span class="tag">Log Analysis</span></div>
+      </a>
+
+      <a href="https://github.com/JamesStahler/soc-analyst-portfolio" target="_blank" rel="noreferrer" class="project-card">
+        <div class="project-top">
+          <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <div>
+            <div class="project-name">Suricata IDS / Detection</div>
+            <p class="project-desc">Installed and configured Suricata IDS. Analyzed alerts, reviewed rules, and detected network threats in lab environments.</p>
+          </div>
+        </div>
+        <div class="tags"><span class="tag">Suricata</span><span class="tag">IDS/IPS</span></div>
+      </a>
+
+    </div>
+
+    <a href="https://github.com/JamesStahler/soc-analyst-portfolio" target="_blank" rel="noreferrer" class="view-all-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      View All Projects on GitHub
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;color:var(--blue-light)"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+    </a>
+  </section>
+
+  <!-- CERTS + PLATFORMS -->
+  <section class="two-col">
+    <div>
+      <div class="section-header">
+        <h2 class="section-title">Certifications &amp; Education</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="cert-list">
+        <div class="cert-row">
+          <div class="cert-left">
+            <svg class="cert-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <div>
+              <div class="cert-name">WGU — B.S. Cybersecurity &amp; Information Assurance</div>
+              <div class="cert-sub">Western Governors University</div>
+            </div>
+          </div>
+          <span class="cert-status">In Progress</span>
+        </div>
+        <div class="cert-row">
+          <div class="cert-left">
+            <svg class="cert-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div>
+              <div class="cert-name">CompTIA A+</div>
+              <div class="cert-sub">Currently studying</div>
+            </div>
+          </div>
+          <span class="cert-status">In Progress</span>
+        </div>
+        <div class="cert-row">
+          <div class="cert-left">
+            <svg class="cert-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            <div>
+              <div class="cert-name">CompTIA Network+</div>
+              <div class="cert-sub">Next certification goal</div>
+            </div>
+          </div>
+          <span class="cert-status">Planned</span>
+        </div>
+        <div class="cert-row">
+          <div class="cert-left">
+            <svg class="cert-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            <div>
+              <div class="cert-name">CompTIA Security+</div>
+              <div class="cert-sub">Continuing to strengthen knowledge</div>
+            </div>
+          </div>
+          <span class="cert-status">Previous Attempt</span>
+        </div>
+        <div class="cert-row">
+          <div class="cert-left">
+            <svg class="cert-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <div>
+              <div class="cert-name">Google Cybersecurity Certificate</div>
+              <div class="cert-sub">Foundational cybersecurity knowledge</div>
+            </div>
+          </div>
+          <span class="cert-status">Completed</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-header">
+        <h2 class="section-title">Hands-On Platforms</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="platforms-grid">
+        <div class="platform-card">
+          <div class="platform-name">TryHackMe</div>
+          <div class="platform-desc">Hands-on cybersecurity labs and learning paths to build practical skills.</div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-name">Hack The Box</div>
+          <div class="platform-desc">Practice penetration testing, enumeration, and real-world attack/defense concepts.</div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-name">VirtualBox Labs</div>
+          <div class="platform-desc">Building and managing virtual machines for labs and testing.</div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-name">Active Directory Lab</div>
+          <div class="platform-desc">Hands-on practice with AD, Group Policy, users, and domain management.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+    <div class="section-header">
+      <h2 class="section-title">Skills &amp; Tools</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-chip">Wireshark</div>
+      <div class="skill-chip">Nmap</div>
+      <div class="skill-chip">PowerShell</div>
+      <div class="skill-chip">Linux</div>
+      <div class="skill-chip">SQL</div>
+      <div class="skill-chip">Suricata</div>
+      <div class="skill-chip">Windows</div>
+      <div class="skill-chip">GitHub</div>
+      <div class="skill-chip">VirtualBox</div>
+    </div>
+  </section>
+
+  <!-- FOOTER CTA -->
+  <div class="cta">
+    <div class="cta-left">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <div>
+        <div class="cta-heading">Continuous Learner. Problem Solver. Future Cybersecurity Professional.</div>
+        <div class="cta-sub">Always learning. Always building. Ready to contribute.</div>
+      </div>
+    </div>
+    <a href="mailto:J.Stahler@aol.com" class="cta-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Let's Connect!
+    </a>
+  </div>
+
+</div>
+</body>
+</html>
